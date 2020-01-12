@@ -1,6 +1,6 @@
-const fs = require("fs");
-const error = require("../utils/error");
-const log = require("../utils/log");
+const fileWriter = require("../utils/fs/fileWriter");
+const error = require("../utils/console/error");
+const log = require("../utils/console/log");
 const inquirer = require("inquirer");
 const inquirerDatePicker = require("inquirer-datepicker-prompt");
 const inquirerFileTreeSelection = require("inquirer-file-tree-selection-prompt");
@@ -121,24 +121,14 @@ module.exports = () => {
     inquirer.prompt(questions).then(answers => {
       log("\nThe file(s) will be created in the current directory...\n");
 
-      const manifest = createManifest(basePath, answers);
+      const publicationData = createManifest(basePath, answers);
 
-      const publicationData = JSON.stringify(manifest, null, 2);
-      fs.writeFile("publication.json", publicationData, (err) => {
-        if (err) {
-          throw err;
-        }
-        log("The manifest (publication.json) has been created.\n");
-      });
+      const manifest = JSON.stringify(publicationData, null, 2);
+      fileWriter("publication.json", manifest, "The manifest (publication.json) has been created.\n");
 
       if (answers._createToc) {
-        const indexPage = createIndex(manifest);
-        fs.writeFile("index.html", indexPage, (err) => {
-          if (err) {
-            throw err;
-          }
-          log("The Primary Entry Page (index.html) has been created.\n");
-        });
+        const indexPage = createIndex(publicationData);
+        fileWriter("index.html", indexPage, "The Primary Entry Page (index.html) has been created.\n");
       }
     });
 

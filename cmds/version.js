@@ -1,4 +1,4 @@
-const log = require("../utils/log");
+const log = require("../utils/console/log");
 
 const { version } = require("../package.json");
 

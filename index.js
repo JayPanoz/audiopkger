@@ -1,5 +1,5 @@
 const minimist = require("minimist");
-const error = require("./utils/error");
+const error = require("./utils/console/error");
 
 module.exports = () => {
   const args = minimist(process.argv.slice(2));
@@ -23,6 +23,9 @@ module.exports = () => {
       break;
     case "package":
       require("./cmds/package")();
+      break;
+    case "toc":
+      require("./cmds/toc")();
       break;
     case "version":
       require("./cmds/version")();

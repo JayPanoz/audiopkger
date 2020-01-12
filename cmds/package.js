@@ -1,7 +1,8 @@
 const fs = require("fs");
+const fileReader = require("../utils/fs/fileReader");
 const path = require("path");
-const error = require("../utils/error");
-const log = require("../utils/log");
+const error = require("../utils/console/error");
+const log = require("../utils/console/log");
 const archiver = require("archiver");
 const prettyBytes = require("pretty-bytes");
 
@@ -12,7 +13,7 @@ module.exports = () => {
   try {
     log(`\nLet’s package your audiobook!\n`);
 
-    const manifestFile = fs.readFileSync("publication.json");
+    const manifestFile = fileReader("publication.json");
     const manifest = JSON.parse(manifestFile);
     const resourceItems = manifest.resources || [];
     const audioItems = manifest.readingOrder || [];

@@ -85,6 +85,18 @@ If you don’t have a table of contents, you can tell the utility to create one 
 
 Once completed, a `publication.json` file will be added in the root directory.
 
+### Generate or Update a Table of Contents
+
+If you did not create a Primary Entry Page (`index.html`) on `init`, or want to update it after editing `publication.json`, you can run:
+
+```
+audiopkger toc
+```
+
+Note this script expects the manifest to be named `publication.json`, and will error if it isn’t.
+
+This will create `index.html` in the root directory, and update the manifest (`publication.json`), adding it to the list of `resources` if it was not already present.
+
 ### Package
 
 The `init` command doesn’t automatically package the audiobook. Indeed, you may have to edit the manifest and table of contents, especially as a pattern `Track + file-index` is used as the title of the chapter (`name`).
@@ -123,5 +135,6 @@ audiopkger [command]
   help ............... show help menu
   init ............... create an audiobook manifest (and toc) in the directory
   package ............ package the directory as .lpf
+  toc ................ create a Table of Contents from the manifest
   version ............ show the version
 ```
