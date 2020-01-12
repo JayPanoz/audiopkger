@@ -6,8 +6,8 @@ module.exports = (type, file, basePath = process.cwd(), name = "", rel) => {
 
   const filePath = file.split(basePath);
   const fileName = path.basename(file);
-  const fileExt = path.extname(file);
-  const dataItem = data[type].find(({ format }) => format === fileExt.substring(1));
+  const fileExt = path.extname(file).substring(1).toLowerCase();
+  const dataItem = data[type].find(({ format }) => format === fileExt);
   const fileEncoding = dataItem.mimetype;
 
   fileObject.url = filePath[1].startsWith("/") ? filePath[1].substring(1) : filePath[1];

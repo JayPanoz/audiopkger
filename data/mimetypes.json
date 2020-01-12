@@ -25,6 +25,14 @@
       "mimetype": "audio/ogg"
     },
     {
+      "format": "ogg",
+      "mimetype": "audio/ogg"
+    },
+    {
+      "format": "opus",
+      "mimetype": "audio/opus"
+    },
+    {
       "format": "wav",
       "mimetype": "audio/wav"
     },
@@ -34,6 +42,14 @@
     }
   ],
   "image": [
+    {
+      "format": "apng",
+      "mimetype": "image/apng"
+    },
+    {
+      "format": "bmp",
+      "mimetype": "image/bmp"
+    },
     {
       "format": "gif",
       "mimetype": "image/gif"
@@ -49,6 +65,10 @@
     {
       "format": "png",
       "mimetype": "image/png"
+    },
+    {
+      "format": "svg",
+      "mimetype": "image/svg+xml"
     },
     {
       "format": "webp",

@@ -8,7 +8,10 @@ module.exports = (basePath) => {
     audioFormats.push(item.format);
   }
   
-  const audioFiles = glob.sync(`**/*.{${audioFormats.toString()}}`, {realpath: true});
+  const audioFiles = glob.sync(`**/*.{${audioFormats.toString()}}`, {
+    realpath: true, 
+    nocase: true
+  });
 
   let audioObjects = [];
 

@@ -1,21 +1,21 @@
 const fs = require("fs");
 const path = require("path");
-const archiver = require("archiver");
-const prettyBytes = require("pretty-bytes");
 const error = require("../utils/error");
 const log = require("../utils/log");
+const archiver = require("archiver");
+const prettyBytes = require("pretty-bytes");
 
 const basePath = process.cwd();
 const filename = path.basename(basePath);
 
-const manifestFile = fs.readFileSync("publication.json");
-const manifest = JSON.parse(manifestFile);
-const resourceItems = manifest.resources || [];
-const audioItems = manifest.readingOrder || [];
-
 module.exports = () => {
   try {
     log(`\nLet’s package your audiobook!\n`);
+
+    const manifestFile = fs.readFileSync("publication.json");
+    const manifest = JSON.parse(manifestFile);
+    const resourceItems = manifest.resources || [];
+    const audioItems = manifest.readingOrder || [];
 
     const output = fs.createWriteStream(`./${filename}.lpf`);
     const archive = archiver("zip");
