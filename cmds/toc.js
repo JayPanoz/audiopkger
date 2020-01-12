@@ -4,24 +4,25 @@ const error = require("../utils/console/error");
 const log = require("../utils/console/log");
 const createIndex = require("../utils/generators/createIndex");
 const makeFileObject = require("../utils/transformers/fileObject");
+const messager = require("../data/messages");
 
 const basePath = process.cwd();
 
 module.exports = () => {
   try {
-    log("Let’s create your table of contents!\n\nThe index.html file will be created in the current directory...\n");
+    log(messager().info.launched("Primary Entry Page"));
 
     const manifestFile = fileReader("publication.json");
     const manifest = JSON.parse(manifestFile);
     
     const indexPage = createIndex(manifest);
-    fileWriter("index.html", indexPage, "The Primary Entry Page (index.html) has been created.\n");
+    fileWriter("index.html", indexPage, messager().info.created("Primary Entry Page (index.html)"));
 
     manifest.resources = manifest.resources || [];
 
     const existingResource = manifest.resources.find(({ rel }) => rel === "contents");
     if (!existingResource) {
-      log("Updating the manifest...\n");
+      log(messager().info.updating);
 
       const tocFile = basePath + "/index.html";
       const tocObject = makeFileObject("document", tocFile, basePath, "Contents", "contents");
@@ -30,7 +31,7 @@ module.exports = () => {
       manifest.resources.push(tocObject);
 
       const updatedManifest = JSON.stringify(manifest, null, 2);
-      fileWriter("publication.json", updatedManifest, "The manifest (publication.json) has been updated.\n");
+      fileWriter("publication.json", updatedManifest, messager().info.created("manifest (publication.json)"));
     }
   } catch (err) {
     error(err, true);

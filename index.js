@@ -1,5 +1,6 @@
 const minimist = require("minimist");
 const error = require("./utils/console/error");
+const messager = require("./data/messages");
 
 module.exports = () => {
   const args = minimist(process.argv.slice(2));
@@ -31,7 +32,7 @@ module.exports = () => {
       require("./cmds/version")();
       break;
     default:
-      error(`"${cmd}" is not a valid command!`, true);
+      error(messager().error.cmd(cmd), true);
       break;
   }
 }

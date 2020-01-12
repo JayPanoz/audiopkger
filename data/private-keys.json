@@ -1,0 +1,9 @@
+{
+  "createToc": "_createToc",
+  "hasCover": "_hasCover",
+  "hasISBN": "_hasISBN",
+  "hasToc": "_hasToc",
+  "coverFile": "_coverFile",
+  "isbn": "_isbn",
+  "tocFile": "_tocFile"
+}

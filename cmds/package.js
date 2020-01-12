@@ -5,13 +5,14 @@ const error = require("../utils/console/error");
 const log = require("../utils/console/log");
 const archiver = require("archiver");
 const prettyBytes = require("pretty-bytes");
+const messager = require("../data/messages");
 
 const basePath = process.cwd();
 const filename = path.basename(basePath);
 
 module.exports = () => {
   try {
-    log(`\nLet’s package your audiobook!\n`);
+    log(messager().info.launched("package"));
 
     const manifestFile = fileReader("publication.json");
     const manifest = JSON.parse(manifestFile);
@@ -23,7 +24,7 @@ module.exports = () => {
 
     output.on("close", () => {
       const fileSize = prettyBytes(archive.pointer());
-      log(`Your ${filename}.lpf archive (${fileSize}) has been created in the root of this directory.\n`);
+      log(messager().info.created(`${filename}.lpf archive (${fileSize})`));
     });
     
     archive.on("warning", (err) => {

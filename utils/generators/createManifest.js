@@ -2,16 +2,7 @@ const createUUID = require("../generators/createUUID");
 const createISBN = require("../generators/createISBN");
 const listAudio = require("../listmakers/listAudio");
 const makeFileObject = require("../transformers/fileObject");
-
-const filteredProps = [
-  "_createToc",
-  "_hasCover",
-  "_hasISBN",
-  "_hasToc",
-  "_coverFile",
-  "_isbn",
-  "_tocFile"
-];
+const pk = require("../../data/private-keys.json");
 
 module.exports = (basePath, answers) => {
   try {
@@ -22,18 +13,18 @@ module.exports = (basePath, answers) => {
       "dateModified": new Date()
     };
 
-    if (answers._createToc) {
-      answers._tocFile = basePath + "/index.html";
+    if (answers[pk.createToc]) {
+      answers[pk.tocFile] = basePath + "/index.html";
     }
 
-    if (answers._isbn) {
-      manifest.id = createISBN(answers._isbn);
+    if (answers[pk.isbn]) {
+      manifest.id = createISBN(answers[pk.isbn]);
     } else {
       manifest.id = createUUID();
     }
 
     for (const prop in answers) {
-      if (!filteredProps.includes(prop)) {
+      if (!Object.values(pk).includes(prop)) {
         const value = answers[prop];
         if (value) {
           if (prop === "datePublished") {
@@ -45,17 +36,17 @@ module.exports = (basePath, answers) => {
       }
     };
 
-    if (answers._coverFile || answers._tocFile) {
+    if (answers[pk.coverFile] || answers[pk.tocFile]) {
       manifest.resources = [];
     }
 
-    if (answers._coverFile) {
-      const coverObject = makeFileObject("image", answers._coverFile, basePath, "Cover", "cover");
+    if (answers[pk.coverFile]) {
+      const coverObject = makeFileObject("image", answers[pk.coverFile], basePath, "Cover", "cover");
       manifest.resources.push(coverObject);
     };
 
-    if (answers._tocFile) {
-      const tocObject = makeFileObject("document", answers._tocFile, basePath, "Contents", "contents");
+    if (answers[pk.tocFile]) {
+      const tocObject = makeFileObject("document", answers[pk.tocFile], basePath, "Contents", "contents");
       manifest.resources.push(tocObject);
     }
 

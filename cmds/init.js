@@ -8,6 +8,8 @@ const createManifest = require("../utils/generators/createManifest");
 const createIndex = require("../utils/generators/createIndex");
 const isValidISBN = require("../utils/validators/isValidISBN");
 const isValidLang = require("../utils/validators/isValidLang");
+const messager = require("../data/messages");
+const pk = require("../data/private-keys.json");
 
 const basePath = process.cwd();
 
@@ -18,117 +20,118 @@ const questions = [
   {
     type: "input",
     name: "name",
-    message: "What is the title of your audiobook?"
+    message: messager().prompts.title
   },
   {
     type: "confirm",
-    name: "_hasISBN",
-    message: "Do you have an ISBN?",
+    name: pk.hasISBN,
+    message: messager().prompts.hasISBN,
     default: true
   },
   {
     type: "input",
-    name: "_isbn",
-    message: "Enter your ISBN",
+    name: pk.isbn,
+    message: messager().prompts.isbn,
     when: (answers) => {
-      return answers._hasISBN;
+      return answers[pk.hasISBN];
     },
     validate: (value) => {
       if (isValidISBN(value)) {
         return true;
       } else {
-        return "Please enter a valid ISBN"
+        return messager().prompts.invalid.isbn;
       }
     }
   },
   {
     type: "input",
     name: "author",
-    message: "What is the name of the author?"
+    message: messager().prompts.author
   },
   {
     type: "input",
     name: "readBy",
-    message: "What is the name of the narrator?"
+    message: messager().prompts.narrator
   },
   {
     type: "input",
     name: "publisher",
-    message: "What is the name of the publisher?"
+    message: messager().prompts.publisher
   },
   {
     type: "input",
     name: "inLanguage",
-    message: "What is the language of your audiobook?",
+    message: messager().prompts.language,
     default: "en",
     validate: (value) => {
       if (isValidLang(value)) {
         return true;
       } else {
-        return "Please enter a valid BCP-47 language tag";
+        return messager().prompts.invalid.language;
       }
     }
   },
   {
     type: "datetime",
     name: "datePublished",
-    message: "What is the publication date?",
+    message: messager().prompts.publicationDate,
     format: ["yyyy", "-", "mm", "-", "dd"]
   },
   {
     type: "confirm",
-    name: "_hasCover",
-    message: "Do you have a cover?",
+    name: pk.hasCover,
+    message: messager().prompts.hasCover,
     default: true
   },
   {
     type: "file-tree-selection",
-    name: "_coverFile",
-    message: "Choose your cover file",
+    name: pk.coverFile,
+    message: messager().prompts.coverFile,
     when: (answers) => {
-      return answers._hasCover;
+      return answers[pk.hasCover];
     }
   },
   {
     type: "confirm",
-    name: "_hasToc",
-    message: "Do you have a primary entry page with a toc?",
+    name: pk.hasToc,
+    message: messager().prompts.hasToc,
     default: true
   },
   {
     type: "file-tree-selection",
-    name: "_tocFile",
-    message: "Choose your index.html file",
+    name: pk.tocFile,
+    message: messager().prompts.tocFile,
     when: (answers) => {
-      return answers._hasToc;
+      return answers[pk.hasToc];
     }
   },
   {
     type: "confirm",
-    name: "_createToc",
-    message: "Would you like to create one?",
+    name: pk.createToc,
+    message: messager().prompts.createToc,
     default: true,
     when: (answers) => {
-      return !answers._hasToc;
+      return !answers[pk.hasToc];
     }
   }
 ];
 
 module.exports = () => {
   try {
-    log(`\nHi, let’s create your audiobook’s manifest!\n\nYou are currently in "${basePath}". Make sure this is the root directory of the audiobook.\n\nIf it is not, you can abort with ctrl+c and navigate to the correct one.\n`);
+    log(messager().info.launched("audiobook’s manifest"));
+    log(messager().info.warning(basePath));
 
     inquirer.prompt(questions).then(answers => {
-      log("\nThe file(s) will be created in the current directory...\n");
+      log(messager().info.started);
 
       const publicationData = createManifest(basePath, answers);
 
       const manifest = JSON.stringify(publicationData, null, 2);
-      fileWriter("publication.json", manifest, "The manifest (publication.json) has been created.\n");
+      fileWriter("publication.json", manifest, messager().info.created("manifest (publication.json)"));
 
-      if (answers._createToc) {
+      if (answers[pk.createToc]) {
         const indexPage = createIndex(publicationData);
-        fileWriter("index.html", indexPage, "The Primary Entry Page (index.html) has been created.\n");
+        fileWriter("index.html", indexPage, messager().info.created("Primary Entry Page (index.html)"));
       }
     });
 
