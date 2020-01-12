@@ -15,11 +15,11 @@ Note this utility only works with simple audiobooks. It doesn’t support:
 - language and base direction;
 - multiple creators.
 
-However, it can still be used to create a starting point in those cases: it will generate files you can edit and complete.
+However, it can still be used to create a starting point in those cases: it will generate files you can edit and augment.
 
 ## Install
 
-First make sure you have nodeJS and npm installed. If you don’t [install it](https://nodejs.org/).
+First make sure you have nodeJS and npm installed. If you don’t, [install it](https://nodejs.org/).
 
 If you don’t want to clone the repository and have easier access to its source code then:
 
@@ -27,7 +27,9 @@ If you don’t want to clone the repository and have easier access to its source
 npm install -g git+https://git@github.com/JayPanoz/audiopkger.git
 ```
 
-Otherwise, clone the repo: 
+Cloning the repo will make it easier to edit code, add new scripts and formats, etc. since the global command will be tied to your clone, and you will be able to directly run the command with those changes.
+
+To clone the repo: 
 
 ```
 git clone https://github.com/JayPanoz/audiopkger.git
@@ -55,7 +57,7 @@ Please make sure you are running those commands from the root directory of your 
 cd path/to/your/audiobook-directory
 ```
 
-Indeed, the utility will look at the files and subfolders within this directory to create the `readingOrder`, list of `resources`, and table of contents.
+Indeed, the utility will look for the files and subfolders within this directory to create the `readingOrder`, list of `resources`, and table of contents.
 
 ### Generate a Manifest and a Table of Contents
 
@@ -79,13 +81,13 @@ This will launch an interactive interface asking you questions to populate the a
 
 Then it will search for audio files in the directory and list them in the manifest (`readingOrder`). Please make sure their filenames are in the correct order.
 
-If you don’t have a table of contents, you can tell the utility to create one automatically – from the `readingOrder`, although you will have to edit the entries of the navigation list. This will create a Primary Entry Page (`index.html`) with the table of contents and add it in the root directory.
+If you don’t have a table of contents, you can tell the utility to create one from the `readingOrder` automatically, although you will have to edit the entries of the navigation list. This will create a Primary Entry Page (`index.html`) with the table of contents and add it in the root directory.
 
 Once completed, a `publication.json` file will be added in the root directory.
 
 ### Package
 
-The `init` command doesn’t automatically package the audiobook. Indeed, you may have to edit the manifest and table of contents, especially as a pattern `Track + file-index` is used as the title of the chapter.
+The `init` command doesn’t automatically package the audiobook. Indeed, you may have to edit the manifest and table of contents, especially as a pattern `Track + file-index` is used as the title of the chapter (`name`).
 
 To package, run the following command: 
 
@@ -93,11 +95,11 @@ To package, run the following command:
 audiopkger package
 ```
 
-Note this script expects the manifest to be called `publication.json`, and will error if it isn’t.
+Note this script expects the manifest to be named `publication.json`, and will error if it isn’t.
 
 It will then check the manifest and package resources into an `.lpf` archive – with audio files using `STORE`. This consequently shouldn’t package dot files if you’re using a Mac for instance.
 
-This means you can also use this utility as a quick and simple packager for W3C audiobooks if you already have everything required.
+This means you can also use this command as a quick and simple packager for W3C audiobooks if you already have everything required.
 
 ### Misc
 
