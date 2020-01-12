@@ -19,12 +19,12 @@ module.exports = () => {
 
     manifest.resources = manifest.resources || [];
 
-    const tocFile = basePath + "/index.html";
-    const tocObject = makeFileObject("document", tocFile, basePath, "Contents", "contents");
-
     const existingResource = manifest.resources.find(({ rel }) => rel === "contents");
     if (!existingResource) {
       log("Updating the manifest...\n");
+
+      const tocFile = basePath + "/index.html";
+      const tocObject = makeFileObject("document", tocFile, basePath, "Contents", "contents");
 
       manifest.dateModified = new Date();
       manifest.resources.push(tocObject);

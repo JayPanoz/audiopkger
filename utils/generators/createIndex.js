@@ -1,4 +1,4 @@
-const doNavList = require("../transformers/orderToList");
+const navList = require("../transformers/navList");
 
 module.exports = (manifest) => {
   try {
@@ -17,7 +17,7 @@ module.exports = (manifest) => {
 <body>
   <h1>${title}</h1>
   <nav role="doc-toc">
-    ${doNavList(manifest.readingOrder)}
+    ${navList(manifest.readingOrder)}
   </nav>
 </body>
 </html>`;
