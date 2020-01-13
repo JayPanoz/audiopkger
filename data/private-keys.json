@@ -4,8 +4,10 @@
   "createToc": "_createToc",
   "hasAddress": "_hasAddress",
   "hasCover": "_hasCover",
+  "hasPreview": "_hasPreview",
   "hasToc": "_hasToc",
   "idType": "_idType",
   "isbn": "_isbn",
+  "previewFile": "_previewFile",
   "tocFile": "_tocFile"
 }

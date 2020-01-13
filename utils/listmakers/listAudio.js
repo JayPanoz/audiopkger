@@ -2,7 +2,7 @@ const glob = require("glob");
 const data = require("../../data/mimetypes.json");
 const makeFileObject = require("../transformers/fileObject");
 
-module.exports = (basePath) => {
+module.exports = (basePath, previewFile) => {
   let audioFormats = [];
   for (const item of data.audio) {
     audioFormats.push(item.format);
@@ -12,6 +12,13 @@ module.exports = (basePath) => {
     realpath: true, 
     nocase: true
   });
+
+  if (previewFile) {
+    const index = audioFiles.indexOf(previewFile);
+    if (index !== -1) {
+      audioFiles.splice(index, 1);
+    }
+  }
 
   let audioObjects = [];
 

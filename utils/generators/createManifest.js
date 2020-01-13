@@ -53,7 +53,7 @@ module.exports = (basePath, answers) => {
       }
     };
 
-    if (answers[pk.coverFile] || answers[pk.tocFile]) {
+    if (answers[pk.coverFile] || answers[pk.tocFile] || answers[pk.previewFile]) {
       manifest.resources = [];
     }
 
@@ -67,7 +67,12 @@ module.exports = (basePath, answers) => {
       manifest.resources.push(tocObject);
     }
 
-    manifest.readingOrder = listAudio(basePath);
+    if (answers[pk.previewFile]) {
+      const previewObject = makeFileObject("audio", answers[pk.previewFile], basePath, "Preview", "preview");
+      manifest.resources.push(previewObject);
+    }
+
+    manifest.readingOrder = listAudio(basePath, answers[pk.previewFile]);
 
     return manifest;
   } catch (err) {
