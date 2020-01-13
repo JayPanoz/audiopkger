@@ -2,6 +2,10 @@
 
 A command-line tool to generate and package W3C audiobooks
 
+## Important Note
+
+This is a work in progress and is not production-ready. If you encounter bugs, please feel free to file an issue or – even better – a pull request.
+
 ## Abstract
 
 This is a small utility you can use in your terminal to generate [W3C audiobooks](https://www.w3.org/TR/audiobooks/). It helps you create a publication manifest, a table of contents (if required), and package your folder into [an `.lpf` archive](https://www.w3.org/TR/lpf/).
@@ -82,6 +86,8 @@ This will launch an interactive interface asking you questions to populate the a
 
 Then it will search for audio files in the directory and list them in the manifest (`readingOrder`). Please make sure their filenames are in the correct order.
 
+The script will search for a title and duration in the audio files’ metadata to populate their `name` and `duration`. In case it doesn’t find a title, a pattern `Track + file-index` is used as a fallback.
+
 If you don’t have a table of contents, you can tell the utility to create one from the `readingOrder` automatically, although you will have to edit the entries of the navigation list. This will create a Primary Entry Page (`index.html`) with the table of contents and add it in the root directory.
 
 Once completed, a `publication.json` file will be added in the root directory.
@@ -100,7 +106,7 @@ This will create `index.html` in the root directory, and update the manifest (`p
 
 ### Package
 
-The `init` command doesn’t automatically package the audiobook. Indeed, you may have to edit the manifest and table of contents, especially as a pattern `Track + file-index` is used as the title of the chapter (`name`).
+The `init` command doesn’t automatically package the audiobook. Indeed, you may have to edit the manifest and table of contents beforehand.
 
 To package, run the following command: 
 

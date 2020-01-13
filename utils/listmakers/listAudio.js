@@ -1,8 +1,10 @@
 const glob = require("glob");
 const data = require("../../data/mimetypes.json");
+const audioMeta = require("../fs/getAudioMeta");
 const makeFileObject = require("../transformers/fileObject");
+const makeDuration = require("../transformers/duration");
 
-module.exports = (basePath, previewFile) => {
+module.exports = async (basePath, previewFile) => {
   let audioFormats = [];
   for (const item of data.audio) {
     audioFormats.push(item.format);
@@ -21,12 +23,29 @@ module.exports = (basePath, previewFile) => {
   }
 
   let audioObjects = [];
+  let totalDuration = 0;
 
-  audioFiles.forEach((file, index) => {
-    const name = "Track " + (index + 1);
+  for (const [index, file] of audioFiles.entries()) {
+    const metadata = await audioMeta(file);
+
+    let name = "Track " + (index + 1);
+    if (metadata.title) {
+      name = metadata.title
+    }
+
     const fileObject = makeFileObject("audio", file, basePath, name);
-    audioObjects.push(fileObject);
-  })
 
-  return audioObjects;
+    if (metadata.duration && !isNaN(metadata.duration)) {
+      const roundedDuration = Math.round(metadata.duration);
+      fileObject.duration = makeDuration(roundedDuration);
+      totalDuration += roundedDuration;
+    }
+
+    audioObjects.push(fileObject);
+  }
+
+  return { 
+    audioObjects, 
+    totalDuration 
+  };
 }
