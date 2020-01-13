@@ -21,6 +21,8 @@ module.exports = () => {
       hasToc: "Do you have a primary entry page with a toc?",
       tocFile: "Choose your index.html file",
       createToc: "Would you like to create one?",
+      hasPreview: "Does your audiobook embed a preview?",
+      previewFile: "Choose your preview file",
       invalid: {
         address: "Please enter a valid URL e.g. https://www.example.org",
         isbn: "Please enter a valid ISBN",

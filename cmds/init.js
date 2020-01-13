@@ -127,7 +127,7 @@ const questions = [
     type: "confirm",
     name: pk.hasToc,
     message: messager().prompts.hasToc,
-    default: true
+    default: false
   },
   {
     type: "file-tree-selection",
@@ -141,9 +141,23 @@ const questions = [
     type: "confirm",
     name: pk.createToc,
     message: messager().prompts.createToc,
-    default: true,
+    default: false,
     when: (answers) => {
       return !answers[pk.hasToc];
+    }
+  },
+  {
+    type: "confirm",
+    name: pk.hasPreview,
+    message: messager().prompts.hasPreview,
+    default: false
+  },
+  {
+    type: "file-tree-selection",
+    name: pk.previewFile,
+    message: messager().prompts.previewFile,
+    when: (answers) => {
+      return answers[pk.hasPreview];
     }
   }
 ];
