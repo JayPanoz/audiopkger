@@ -1,6 +1,6 @@
 const fs = require("fs");
-const fileReader = require("../utils/fs/fileReader");
 const path = require("path");
+const fileReader = require("../utils/fs/fileReader");
 const error = require("../utils/console/error");
 const log = require("../utils/console/log");
 const archiver = require("archiver");

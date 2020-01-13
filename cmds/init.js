@@ -8,6 +8,7 @@ const createManifest = require("../utils/generators/createManifest");
 const createIndex = require("../utils/generators/createIndex");
 const isValidISBN = require("../utils/validators/isValidISBN");
 const isValidLang = require("../utils/validators/isValidLang");
+const isValidURL = require("../utils/validators/isValidURL");
 const messager = require("../data/messages");
 const pk = require("../data/private-keys.json");
 
@@ -24,16 +25,47 @@ const questions = [
   },
   {
     type: "confirm",
-    name: pk.hasISBN,
-    message: messager().prompts.hasISBN,
-    default: true
+    name: pk.hasAddress,
+    message: messager().prompts.hasAddress,
+    default: false
+  },
+  {
+    type: "input",
+    name: pk.address,
+    message: messager().prompts.address,
+    when: (answers) => {
+      return answers[pk.hasAddress];
+    },
+    validate: (value) => {
+      if (isValidURL(value)) {
+        return true;
+      } else {
+        return messager().prompts.invalid.address;
+      }
+    }
+  },
+  {
+    type: "list",
+    name: pk.idType,
+    message: messager().prompts.idType,
+    choices: [
+      messager().prompts.idTypes.address, 
+      messager().prompts.idTypes.isbn,
+      messager().prompts.idTypes.uuid
+    ],
+    default: (answers) => {
+      if (answers[pk.hasAddress]) {
+        return 0;
+      }
+      return 1;
+    }
   },
   {
     type: "input",
     name: pk.isbn,
     message: messager().prompts.isbn,
     when: (answers) => {
-      return answers[pk.hasISBN];
+      return answers[pk.idType] === "ISBN";
     },
     validate: (value) => {
       if (isValidISBN(value)) {
@@ -122,7 +154,7 @@ module.exports = () => {
     log(messager().info.warning(basePath));
 
     inquirer.prompt(questions).then(answers => {
-      log(messager().info.started);
+      log(messager().info.started("file(s)"));
 
       const publicationData = createManifest(basePath, answers);
 

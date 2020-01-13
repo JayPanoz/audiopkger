@@ -2,10 +2,17 @@ const createUUID = require("../generators/createUUID");
 const createISBN = require("../generators/createISBN");
 const listAudio = require("../listmakers/listAudio");
 const makeFileObject = require("../transformers/fileObject");
+const messager = require("../../data/messages");
 const pk = require("../../data/private-keys.json");
 
 module.exports = (basePath, answers) => {
   try {
+    const idTypes = {
+      address: messager().prompts.idTypes.address,
+      isbn: messager().prompts.idTypes.isbn,
+      uuid: messager().prompts.idTypes.uuid
+    }
+
     let manifest = {
       "@context": ["https://schema.org", "https://www.w3.org/ns/pub-context"],
       "conformsTo": "https://www.w3/org/TR/audiobooks/",
@@ -17,9 +24,19 @@ module.exports = (basePath, answers) => {
       answers[pk.tocFile] = basePath + "/index.html";
     }
 
-    if (answers[pk.isbn]) {
+    if (answers[pk.address]) {
+      if (answers[pk.idType] === idTypes.address) {
+        manifest.id = answers[pk.address];
+      } else {
+        manifest.url = answers[pk.address];
+      }
+    }
+
+    if ((answers[pk.idType] === idTypes.isbn) && answers[pk.isbn]) {
       manifest.id = createISBN(answers[pk.isbn]);
-    } else {
+    }
+
+    if ((answers[pk.idType] === idTypes.uuid) || (!answers[pk.address] && !answers[pk.isbn])) {
       manifest.id = createUUID();
     }
 

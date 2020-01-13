@@ -22,7 +22,7 @@ module.exports = () => {
 
     const existingResource = manifest.resources.find(({ rel }) => rel === "contents");
     if (!existingResource) {
-      log(messager().info.updating);
+      log(messager().info.updating("manifest"));
 
       const tocFile = basePath + "/index.html";
       const tocObject = makeFileObject("document", tocFile, basePath, "Contents", "contents");
