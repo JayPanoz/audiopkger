@@ -1,9 +1,11 @@
 {
-  "createToc": "_createToc",
-  "hasCover": "_hasCover",
-  "hasISBN": "_hasISBN",
-  "hasToc": "_hasToc",
+  "address": "_address",
   "coverFile": "_coverFile",
+  "createToc": "_createToc",
+  "hasAddress": "_hasAddress",
+  "hasCover": "_hasCover",
+  "hasToc": "_hasToc",
+  "idType": "_idType",
   "isbn": "_isbn",
   "tocFile": "_tocFile"
 }
