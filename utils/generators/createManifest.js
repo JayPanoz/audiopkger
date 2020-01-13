@@ -2,10 +2,11 @@ const createUUID = require("../generators/createUUID");
 const createISBN = require("../generators/createISBN");
 const listAudio = require("../listmakers/listAudio");
 const makeFileObject = require("../transformers/fileObject");
+const makeDuration = require("../transformers/duration");
 const messager = require("../../data/messages");
 const pk = require("../../data/private-keys.json");
 
-module.exports = (basePath, answers) => {
+module.exports = async (basePath, answers) => {
   try {
     const idTypes = {
       address: messager().prompts.idTypes.address,
@@ -72,7 +73,13 @@ module.exports = (basePath, answers) => {
       manifest.resources.push(previewObject);
     }
 
-    manifest.readingOrder = listAudio(basePath, answers[pk.previewFile]);
+    const audio = await listAudio(basePath, answers[pk.previewFile])
+
+    manifest.readingOrder = audio.audioObjects;
+
+    if (audio.totalDuration > 0) {
+      manifest.duration = makeDuration(audio.totalDuration);
+    }
 
     return manifest;
   } catch (err) {

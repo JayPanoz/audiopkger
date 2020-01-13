@@ -167,10 +167,10 @@ module.exports = () => {
     log(messager().info.launched("audiobook’s manifest"));
     log(messager().info.warning(basePath));
 
-    inquirer.prompt(questions).then(answers => {
+    inquirer.prompt(questions).then( async (answers) => {
       log(messager().info.started("file(s)"));
 
-      const publicationData = createManifest(basePath, answers);
+      const publicationData = await createManifest(basePath, answers);
 
       const manifest = JSON.stringify(publicationData, null, 2);
       fileWriter("publication.json", manifest, messager().info.created("manifest (publication.json)"));
