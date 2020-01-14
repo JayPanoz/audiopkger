@@ -1,3 +1,5 @@
+const chalk = require("chalk");
+
 module.exports = () => {
   return {
     prompts: {
@@ -31,24 +33,24 @@ module.exports = () => {
     },
     info: {
       launched: (type) => {
-        return `\nLet’s create your ${type}!\n`
+        return chalk.cyan(`\nLet’s create your ${type}!\n`);
       },
       warning: (basePath) => {
-        return `You are currently in "${basePath}". Make sure this is the root directory of the audiobook.\n\nIf it is not, you can abort with ctrl+c and navigate to the correct one.\n`
+        return chalk.bold.yellow(`You are currently in "${basePath}". Make sure this is the root directory of the audiobook.\n\nIf it is not, you can abort with ctrl+c and navigate to the correct one.\n`);
       },
       started: (filestring) => {
-        return `\nThe ${filestring} will be created in the current directory...\n`
+        return `\nThe ${filestring} will be created in the current directory...\n`;
       },
       created: (filestring) => {
-        return `The ${filestring} has been created.\n`
+        return chalk.green(`The ${filestring} has been created.\n`);
       },
       updating: (filestring) => {
-        return `Updating the ${filestring}...\n`
+        return chalk.yellow(`Updating the ${filestring}...\n`);
       }
     },
     error: {
       cmd: (cmd) => {
-        return `"${cmd}" is not a valid command!`;
+        return chalk.bold.red(`"${cmd}" is not a valid command!`);
       }
     }
   }
