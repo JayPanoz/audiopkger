@@ -24,6 +24,7 @@ module.exports = async (basePath, previewFile) => {
 
   let audioObjects = [];
   let totalDuration = 0;
+  let durationCount = 0;
 
   for (const [index, file] of audioFiles.entries()) {
     const metadata = await getAudioMeta(file);
@@ -39,9 +40,14 @@ module.exports = async (basePath, previewFile) => {
       const roundedDuration = Math.round(metadata.duration);
       fileObject.duration = makeDuration(roundedDuration);
       totalDuration += roundedDuration;
+      ++durationCount;
     }
 
     audioObjects.push(fileObject);
+  }
+
+  if (durationCount !== audioObjects.length) {
+    totalDuration = 0;
   }
 
   return { 

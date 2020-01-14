@@ -16,6 +16,6 @@ module.exports = async (audioFile) => {
     
     return metadata;
   } catch (err) {
-    throw err;
+    return {};
   }
 }
