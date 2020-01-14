@@ -65,7 +65,7 @@ const questions = [
     name: pk.isbn,
     message: messager().prompts.isbn,
     when: (answers) => {
-      return answers[pk.idType] === "ISBN";
+      return answers[pk.idType] === messager().prompts.idTypes.isbn;
     },
     validate: (value) => {
       if (isValidISBN(value)) {

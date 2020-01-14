@@ -1,6 +1,6 @@
 const glob = require("glob");
 const data = require("../../data/mimetypes.json");
-const audioMeta = require("../fs/getAudioMeta");
+const getAudioMeta = require("../fs/getAudioMeta");
 const makeFileObject = require("../transformers/fileObject");
 const makeDuration = require("../transformers/duration");
 
@@ -26,7 +26,7 @@ module.exports = async (basePath, previewFile) => {
   let totalDuration = 0;
 
   for (const [index, file] of audioFiles.entries()) {
-    const metadata = await audioMeta(file);
+    const metadata = await getAudioMeta(file);
 
     let name = "Track " + (index + 1);
     if (metadata.title) {
