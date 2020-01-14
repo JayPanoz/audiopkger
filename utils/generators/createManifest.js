@@ -1,6 +1,7 @@
 const createUUID = require("../generators/createUUID");
 const createISBN = require("../generators/createISBN");
 const listAudio = require("../listmakers/listAudio");
+const listEntities = require("../listmakers/listEntities");
 const makeFileObject = require("../transformers/fileObject");
 const makeDuration = require("../transformers/duration");
 const messager = require("../../data/messages");
@@ -45,10 +46,22 @@ module.exports = async (basePath, answers) => {
       if (!Object.values(pk).includes(prop)) {
         const value = answers[prop];
         if (value) {
-          if (prop === "datePublished") {
-            manifest[prop] = value.toISOString().split("T")[0];
-          } else {
-            manifest[prop] = value;
+          switch (prop) {
+            case "author":
+              manifest[prop] = listEntities(value);
+              break;
+            case "readBy":
+              manifest[prop] = listEntities(value);
+              break;
+            case "publisher":
+              manifest[prop] = listEntities(value);
+              break;
+            case "datePublished":
+              manifest[prop] = value.toISOString().split("T")[0];
+              break;
+            default:
+              manifest[prop] = value;
+              break;
           }
         }
       }
