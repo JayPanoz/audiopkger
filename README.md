@@ -25,15 +25,21 @@ However, it can still be used to create a starting point in those cases: it will
 
 First make sure you have nodeJS and npm installed. If you don’t, [install it](https://nodejs.org/).
 
-If you don’t want to clone the repository and have easier access to its source code then:
+If you don’t want to fork and/or clone the repository and have easier access to its source code then:
 
 ```
 npm install -g git+https://git@github.com/JayPanoz/audiopkger.git
 ```
 
-Cloning the repo will make it easier to edit code, add new scripts and formats, etc. since the global command will be tied to your clone, and you will be able to directly run the command with those changes.
+[Forking](https://help.github.com/en/github/getting-started-with-github/fork-a-repo) and/or cloning the repo will make it easier to edit code, add new scripts and formats, etc. since the global command will be tied to your local copy, and you will be able to directly run the command with those changes.
 
-To clone the repo: 
+If you are forking it, you will have to clone yours:
+
+```
+git clone https://github.com/YourUsername/audiopkger.git
+```
+
+Otherwise: 
 
 ```
 git clone https://github.com/JayPanoz/audiopkger.git
@@ -52,6 +58,14 @@ npm install -g
 ```
 
 If for some reason the `audiopkger` command doesn’t work after the install, run `npm link` from the root of the cloned repository.
+
+To keep your fork in sync, you can also do:
+
+```
+git remote add upstream https://github.com/JayPanoz/audiopkger.git
+```
+
+Then you’ll be able to [fetch and merge changes](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/syncing-a-fork) made in this upstream repo.
 
 ## Usage
 
