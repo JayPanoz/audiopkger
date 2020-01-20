@@ -1,3 +1,4 @@
+const path = require("path");
 const createUUID = require("../generators/createUUID");
 const createISBN = require("../generators/createISBN");
 const listAudio = require("../listmakers/listAudio");
@@ -23,7 +24,7 @@ module.exports = async (basePath, answers) => {
     };
 
     if (answers[pk.createToc]) {
-      answers[pk.tocFile] = basePath + "/index.html";
+      answers[pk.tocFile] = path.join(basePath, "index.html");
     }
 
     if (answers[pk.address]) {
