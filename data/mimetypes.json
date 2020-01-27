@@ -5,7 +5,15 @@
       "mimetype": "audio/aac"
     },
     {
+      "format": "flac",
+      "mimetype": "audio/flac"
+    },
+    {
       "format": "m4a",
+      "mimetype": "audio/mp4"
+    },
+    {
+      "format": "m4b",
       "mimetype": "audio/mp4"
     },
     {
