@@ -137,6 +137,8 @@ It will then check the manifest and package resources into an `.lpf` archive –
 
 This means you can also use this command as a quick and simple packager for W3C audiobooks if you already have everything required.
 
+Quick tip: rename the `.lpf` extension to `.zip` to easily unzip this package if needed.
+
 ### Misc
 
 To print the help, run:
