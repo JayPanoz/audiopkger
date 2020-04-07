@@ -37,7 +37,7 @@
     "inquirer-datepicker-prompt": "^0.4.2",
     "inquirer-file-tree-selection-prompt": "^1.0.3",
     "is-isbn": "^1.1.0",
-    "minimist": "^1.2.2",
+    "minimist": "^1.2.3",
     "music-metadata": "^6.2.0",
     "pretty-bytes": "^5.3.0",
     "uuid": "^3.3.3"
