@@ -1,5 +1,6 @@
 const fileReader = require("../utils/fs/fileReader");
 const fileWriter = require("../utils/fs/fileWriter");
+const path = require("path");
 const error = require("../utils/console/error");
 const log = require("../utils/console/log");
 const createIndex = require("../utils/generators/createIndex");
@@ -24,7 +25,7 @@ module.exports = () => {
     if (!existingResource) {
       log(messager().info.updating("manifest"));
 
-      const tocFile = basePath + "/index.html";
+      const tocFile = path.join(basePath, "index.html");
       const tocObject = makeFileObject("document", tocFile, basePath, "Contents", "contents");
 
       manifest.dateModified = new Date();

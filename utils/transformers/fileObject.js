@@ -4,13 +4,17 @@ const data = require("../../data/mimetypes.json");
 module.exports = (type, file, basePath = process.cwd(), name = "", rel) => {
   let fileObject = {};
 
-  const filePath = file.split(basePath);
+  let filePath = path.normalize(file.split(basePath)[1]);
+  if (process.platform === "win32") {
+    filePath = filePath.replace(/\\/g, "/");
+  }
+
   const fileName = path.basename(file);
   const fileExt = path.extname(file).substring(1).toLowerCase();
   const dataItem = data[type].find(({ format }) => format === fileExt);
   const fileEncoding = dataItem.mimetype;
 
-  fileObject.url = filePath[1].startsWith("/") ? filePath[1].substring(1) : filePath[1];
+  fileObject.url = filePath.startsWith("/") ? filePath.substring(1) : filePath;
   fileObject.encodingFormat = fileEncoding;
 
   if (name) {
