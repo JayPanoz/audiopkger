@@ -149,6 +149,12 @@ This process may take a while depending on the size of your audiobook, but it wo
 
 Note Audiopkger doesn’t attempt to check the bitrate of the source audio files, it will blindly follow your instructions.
 
+If you want something more verbose when using this bitrate option, and log FFMPEG’s progress when processing your audio files, you can run:
+
+```
+audiopkger package -b <number> -d
+```
+
 Quick tip: rename the `.lpf` extension to `.zip` to easily unzip this package if needed. If you’re using Visual Studio Code, you could also install [this extension](https://github.com/JayPanoz/vscode-zipexplorer).
 
 ### Misc
@@ -174,7 +180,7 @@ audiopkger [command]
   init ............... create an audiobook manifest (and toc) in the directory
   package ............ package the directory as .lpf
     --bitrate, -b ......... use FFMPEG to modify the bitrate of packaged audio
-    --details, -d ......... logs progression of FFMPEG processing
+    --details, -d ......... log progression of FFMPEG processing
   toc ................ create a Table of Contents from the manifest
   version ............ show the version
 ```
