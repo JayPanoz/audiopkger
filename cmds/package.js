@@ -14,6 +14,7 @@ const filename = path.basename(basePath);
 module.exports = (args) => {
   try {
     const bitrate = args.bitrate || args.b;
+    const details = args.details || args.d || false;
 
     log(messenger().info.launched("package"));
 
@@ -54,7 +55,7 @@ module.exports = (args) => {
     for (const audio of audioItems) {
       const audioFile = audio.url;
       if (bitrate) {
-        const tmpStream = ffmpegProcess(audioFile, bitrate);
+        const tmpStream = ffmpegProcess(audioFile, bitrate, details);
         archive.append(tmpStream, {name: audioFile, store: true});
       } else {
         archive.file(audioFile, {store: true});

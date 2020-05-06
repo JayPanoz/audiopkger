@@ -53,7 +53,7 @@ module.exports = () => {
         return `"${filestring}" is being processed by FFMPEG…\n`
       },
       progress: (progress, filestring) => {
-        return `Processing "${filestring}": ${progress.percent}% done\n`
+        return `"${filestring}": ${Math.round(progress.percent)}% done`
       },
       error: (err) => {
         return chalk.bold.red(`× Could not process audio: ${err.message}\n`);

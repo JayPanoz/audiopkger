@@ -174,6 +174,7 @@ audiopkger [command]
   init ............... create an audiobook manifest (and toc) in the directory
   package ............ package the directory as .lpf
     --bitrate, -b ......... use FFMPEG to modify the bitrate of packaged audio
+    --details, -d ......... logs progression of FFMPEG processing
   toc ................ create a Table of Contents from the manifest
   version ............ show the version
 ```
