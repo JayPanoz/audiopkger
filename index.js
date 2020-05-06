@@ -1,6 +1,6 @@
 const minimist = require("minimist");
 const error = require("./utils/console/error");
-const messager = require("./data/messages");
+const messenger = require("./data/messages");
 
 module.exports = () => {
   const args = minimist(process.argv.slice(2));
@@ -32,7 +32,7 @@ module.exports = () => {
       require("./cmds/version")();
       break;
     default:
-      error(messager().error.cmd(cmd), true);
+      error(messenger().error.cmd(cmd), true);
       break;
   }
 }

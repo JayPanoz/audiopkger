@@ -1,6 +1,6 @@
 {
   "name": "audiopkger",
-  "version": "0.17.0",
+  "version": "0.17.1",
   "description": "A command-line tool to generate and package W3C audiobooks",
   "main": "index.js",
   "bin": {

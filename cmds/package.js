@@ -6,7 +6,7 @@ const log = require("../utils/console/log");
 const ffmpegProcess = require("../utils/fs/ffmpeg");
 const archiver = require("archiver");
 const prettyBytes = require("pretty-bytes");
-const messager = require("../data/messages");
+const messenger = require("../data/messages");
 
 const basePath = process.cwd();
 const filename = path.basename(basePath);
@@ -15,7 +15,7 @@ module.exports = (args) => {
   try {
     const bitrate = args.bitrate || args.b;
 
-    log(messager().info.launched("package"));
+    log(messenger().info.launched("package"));
 
     const manifestFile = fileReader("publication.json");
     const manifest = JSON.parse(manifestFile);
@@ -27,7 +27,7 @@ module.exports = (args) => {
 
     output.on("finish", () => {
       const fileSize = prettyBytes(archive.pointer());
-      log(messager().info.created(`${filename}.lpf archive (${fileSize})`));
+      log(messenger().info.created(`${filename}.lpf archive (${fileSize})`));
     });
     
     archive.on("warning", (err) => {

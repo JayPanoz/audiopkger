@@ -5,15 +5,15 @@ const listAudio = require("../listmakers/listAudio");
 const listEntities = require("../listmakers/listEntities");
 const makeFileObject = require("../transformers/fileObject");
 const makeDuration = require("../transformers/duration");
-const messager = require("../../data/messages");
+const messenger = require("../../data/messages");
 const pk = require("../../data/private-keys.json");
 
 module.exports = async (basePath, answers) => {
   try {
     const idTypes = {
-      address: messager().prompts.idTypes.address,
-      isbn: messager().prompts.idTypes.isbn,
-      uuid: messager().prompts.idTypes.uuid
+      address: messenger().prompts.idTypes.address,
+      isbn: messenger().prompts.idTypes.isbn,
+      uuid: messenger().prompts.idTypes.uuid
     }
 
     let manifest = {
