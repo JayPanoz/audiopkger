@@ -6,6 +6,7 @@ const menu = `
     help ............... show help menu
     init ............... create an audiobook manifest (and toc) in the directory
     package ............ package the directory as .lpf
+      --bitrate, -b ......... use FFMPEG to modify the bitrate of packaged audio
     toc ................ create a Table of Contents from the manifest
     version ............ show the version\n`;
 

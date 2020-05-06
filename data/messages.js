@@ -42,10 +42,24 @@ module.exports = () => {
         return `\nThe ${filestring} will be created in the current directory...\n`;
       },
       created: (filestring) => {
-        return chalk.green(`The ${filestring} has been created.\n`);
+        return chalk.bold.green(`The ${filestring} has been created.\n`);
       },
       updating: (filestring) => {
         return chalk.yellow(`Updating the ${filestring}...\n`);
+      }
+    },
+    ffmpeg: {
+      start: (filestring) => {
+        return `"${filestring}" is being processed by FFMPEG…\n`
+      },
+      progress: (progress, filestring) => {
+        return `Processing "${filestring}": ${progress.percent}% done\n`
+      },
+      error: (err) => {
+        return chalk.bold.red(`× Could not process audio: ${err.message}\n`);
+      },
+      end: (filestring) => {
+        return chalk.green(`✓ "${filestring}" was successfuly processed.\n`);
       }
     },
     error: {

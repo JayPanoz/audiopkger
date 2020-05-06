@@ -3,6 +3,7 @@ const path = require("path");
 const fileReader = require("../utils/fs/fileReader");
 const error = require("../utils/console/error");
 const log = require("../utils/console/log");
+const ffmpegProcess = require("../utils/fs/ffmpeg");
 const archiver = require("archiver");
 const prettyBytes = require("pretty-bytes");
 const messager = require("../data/messages");
@@ -10,8 +11,10 @@ const messager = require("../data/messages");
 const basePath = process.cwd();
 const filename = path.basename(basePath);
 
-module.exports = () => {
+module.exports = (args) => {
   try {
+    const bitrate = args.bitrate || args.b;
+
     log(messager().info.launched("package"));
 
     const manifestFile = fileReader("publication.json");
@@ -22,7 +25,7 @@ module.exports = () => {
     const output = fs.createWriteStream(`./${filename}.lpf`);
     const archive = archiver("zip");
 
-    output.on("close", () => {
+    output.on("finish", () => {
       const fileSize = prettyBytes(archive.pointer());
       log(messager().info.created(`${filename}.lpf archive (${fileSize})`));
     });
@@ -50,7 +53,12 @@ module.exports = () => {
 
     for (const audio of audioItems) {
       const audioFile = audio.url;
-      archive.file(audioFile, {store: true});
+      if (bitrate) {
+        const tmpStream = ffmpegProcess(audioFile, bitrate);
+        archive.append(tmpStream, {name: audioFile, store: true});
+      } else {
+        archive.file(audioFile, {store: true});
+      }
     }
 
     archive.finalize();
