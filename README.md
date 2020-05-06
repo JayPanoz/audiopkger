@@ -140,7 +140,7 @@ This means you can also use this command as a quick and simple packager for W3C 
 If you want to modify the bitrate of packaged audio, you can run:
 
 ```
-audiopkger package -b 128
+audiopkger package -b <number>
 ```
 
 Make sure you have [FFMPEG installed](https://github.com/fluent-ffmpeg/node-fluent-ffmpeg/wiki) before running this command or else it will obviously fail.
@@ -149,7 +149,7 @@ This process may take a while depending on the size of your audiobook, but it wo
 
 Note Audiopkger doesn’t attempt to check the bitrate of the source audio files, it will blindly follow your instructions.
 
-Quick tip: rename the `.lpf` extension to `.zip` to easily unzip this package if needed.
+Quick tip: rename the `.lpf` extension to `.zip` to easily unzip this package if needed. If you’re using Visual Studio Code, you could also install [this extension](https://github.com/JayPanoz/vscode-zipexplorer).
 
 ### Misc
 
