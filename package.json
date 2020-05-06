@@ -1,6 +1,6 @@
 {
   "name": "audiopkger",
-  "version": "0.16.0",
+  "version": "0.17.0",
   "description": "A command-line tool to generate and package W3C audiobooks",
   "main": "index.js",
   "bin": {
@@ -32,6 +32,7 @@
     "archiver": "^3.1.1",
     "bcp47-validate": "^1.0.0",
     "chalk": "^3.0.0",
+    "fluent-ffmpeg": "^2.1.2",
     "glob": "^7.1.6",
     "inquirer": "^7.0.3",
     "inquirer-datepicker-prompt": "^0.4.2",
