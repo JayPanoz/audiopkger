@@ -137,6 +137,18 @@ It will then check the manifest and package resources into an `.lpf` archive –
 
 This means you can also use this command as a quick and simple packager for W3C audiobooks if you already have everything required.
 
+If you want to modify the bitrate of packaged audio, you can run:
+
+```
+audiopkger package -b 128
+```
+
+Make sure you have [FFMPEG installed](https://github.com/fluent-ffmpeg/node-fluent-ffmpeg/wiki) before running this command or else it will obviously fail.
+
+This process may take a while depending on the size of your audiobook, but it won’t overwrite your audio files.
+
+Note Audiopkger doesn’t attempt to check the bitrate of the source audio files, it will blindly follow your instructions.
+
 Quick tip: rename the `.lpf` extension to `.zip` to easily unzip this package if needed.
 
 ### Misc
@@ -161,6 +173,7 @@ audiopkger [command]
   help ............... show help menu
   init ............... create an audiobook manifest (and toc) in the directory
   package ............ package the directory as .lpf
+    --bitrate, -b ......... use FFMPEG to modify the bitrate of packaged audio
   toc ................ create a Table of Contents from the manifest
   version ............ show the version
 ```

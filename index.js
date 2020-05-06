@@ -23,7 +23,7 @@ module.exports = () => {
       require("./cmds/init")();
       break;
     case "package":
-      require("./cmds/package")();
+      require("./cmds/package")(args);
       break;
     case "toc":
       require("./cmds/toc")();
