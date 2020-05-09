@@ -1,6 +1,6 @@
 {
   "name": "audiopkger",
-  "version": "0.17.3",
+  "version": "0.18.0",
   "description": "A command-line tool to generate and package W3C audiobooks",
   "main": "index.js",
   "bin": {
@@ -34,13 +34,14 @@
     "chalk": "^3.0.0",
     "fluent-ffmpeg": "^2.1.2",
     "glob": "^7.1.6",
-    "inquirer": "^7.0.3",
+    "inquirer": "^7.1.0",
     "inquirer-datepicker-prompt": "^0.4.2",
-    "inquirer-file-tree-selection-prompt": "^1.0.3",
+    "inquirer-file-tree-selection-prompt": "^1.0.6",
     "is-isbn": "^1.1.0",
-    "minimist": "^1.2.3",
-    "music-metadata": "^6.2.0",
+    "mime-types": "^2.1.27",
+    "minimist": "^1.2.5",
+    "music-metadata": "^6.3.7",
     "pretty-bytes": "^5.3.0",
-    "uuid": "^3.3.3"
+    "uuid": "^3.4.0"
   }
 }

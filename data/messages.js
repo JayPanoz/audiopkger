@@ -25,6 +25,8 @@ module.exports = () => {
       createToc: "Would you like to create one?",
       hasPreview: "Does your audiobook embed a preview?",
       previewFile: "Choose your preview file",
+      hasSupplements: "Does your audiobook embed supplemental content e.g. booklet?",
+      supplementalFiles: "Choose your supplemental file(s). Use tab to expand the current folder, space to check the current item, enter to confirm your selection.",
       invalid: {
         address: "Please enter a valid URL e.g. https://www.example.org",
         isbn: "Please enter a valid ISBN",

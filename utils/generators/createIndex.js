@@ -1,4 +1,5 @@
 const navList = require("../transformers/navList");
+const supplementsList = require("../transformers/supplementsList");
 const arrayToString = require("../transformers/arrayToString");
 
 module.exports = (manifest) => {
@@ -25,7 +26,7 @@ module.exports = (manifest) => {
   <h1>${title}</h1>
   <nav role="doc-toc">
     ${navList(manifest.readingOrder)}
-  </nav>
+  </nav>${supplementsList(manifest.resources)}
 </body>
 </html>`;
   } catch(err) {
