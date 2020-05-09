@@ -1,4 +1,5 @@
 const path = require("path");
+const mime = require("mime-types");
 const data = require("../../data/mimetypes.json");
 
 module.exports = (type, file, basePath = process.cwd(), name = "", rel) => {
@@ -11,8 +12,13 @@ module.exports = (type, file, basePath = process.cwd(), name = "", rel) => {
 
   const fileName = path.basename(file);
   const fileExt = path.extname(file).substring(1).toLowerCase();
-  const dataItem = data[type].find(({ format }) => format === fileExt);
-  const fileEncoding = dataItem.mimetype;
+  let fileEncoding;
+  if (type === "*") {
+    fileEncoding = mime.lookup(fileName);
+  } else {
+    const dataItem = data[type].find(({ format }) => format === fileExt);
+    fileEncoding = dataItem.mimetype;
+  }
 
   fileObject.url = filePath.startsWith("/") ? filePath.substring(1) : filePath;
   fileObject.encodingFormat = fileEncoding;
@@ -20,7 +26,7 @@ module.exports = (type, file, basePath = process.cwd(), name = "", rel) => {
   if (name) {
     fileObject.name = name;
   } else {
-    fileObject.name = fileName.slice(0 , -fileExt.length);
+    fileObject.name = fileName.slice(0 , -(fileExt.length + 1));
   }
 
   if (rel) {

@@ -8,6 +8,8 @@ This is a work in progress and is not production-ready. Expect code to change an
 
 If you encounter bugs, please feel free to file an issue or – even better – a pull request.
 
+If you’ve been using a version < 0.18.0, please reinstall using `npm ci` as upgraded and new dependencies are required.
+
 ## Abstract
 
 This is a small utility you can use in your terminal to generate [W3C audiobooks](https://www.w3.org/TR/audiobooks/). It helps you create a publication manifest, a table of contents (if required), and package your folder into [an `.lpf` archive](https://www.w3.org/TR/lpf/).
@@ -16,7 +18,6 @@ Note this utility only works with simple audiobooks. It doesn’t support:
 
 - alternate formats and content (e.g. Synchronized Narration or text);
 - media fragments (a.k.a. references to locations in a single audio track);
-- supplemental content;
 - language and base direction.
 
 However, it can still be used to create a starting point in those cases: it will generate files you can edit and augment.
@@ -97,7 +98,8 @@ This will launch an interactive interface asking you questions to populate the a
 8. its publication date;
 9. its cover;
 10. its table of contents;
-11. its internal preview.
+11. its internal preview;
+12. its supplemental content(s).
 
 When a text input is left blank, it will simply not appear in the manifest.
 
@@ -105,7 +107,7 @@ Then it will search for audio files in the directory and list them in the manife
 
 The script will search for a title and duration in the audio files’ metadata to populate their `name` and `duration`. In case it doesn’t find a title, a pattern `Track + file-index` is used as a fallback.
 
-If you don’t have a table of contents, you can tell the utility to create one from the `readingOrder` automatically, although you will have to edit the entries of the navigation list. This will create a Primary Entry Page (`index.html`) with the table of contents and add it in the root directory.
+If you don’t have a table of contents, you can tell the utility to create one from the `readingOrder` automatically, although you will have to edit the entries of the navigation list. This will create a Primary Entry Page (`index.html`) with the table of contents – and table of supplements if any –, and add it in the root directory.
 
 Once completed, a `publication.json` file will be added in the root directory.
 

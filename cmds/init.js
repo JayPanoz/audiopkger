@@ -159,6 +159,21 @@ const questions = [
     when: (answers) => {
       return answers[pk.hasPreview];
     }
+  },
+  {
+    type: "confirm",
+    name: pk.hasSupplements,
+    message: messenger().prompts.hasSupplements,
+    default: false
+  },
+  {
+    type: "file-tree-selection",
+    name: pk.supplementalFiles,
+    message: messenger().prompts.supplementalFiles,
+    multiple: true,
+    when: (answers) => {
+      return answers[pk.hasSupplements];
+    }
   }
 ];
 

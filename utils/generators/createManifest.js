@@ -1,7 +1,9 @@
+const fs = require("fs");
 const path = require("path");
 const createUUID = require("../generators/createUUID");
 const createISBN = require("../generators/createISBN");
 const listAudio = require("../listmakers/listAudio");
+const listDirFiles = require("../listmakers/listDirFiles");
 const listEntities = require("../listmakers/listEntities");
 const makeFileObject = require("../transformers/fileObject");
 const makeDuration = require("../transformers/duration");
@@ -68,7 +70,7 @@ module.exports = async (basePath, answers) => {
       }
     };
 
-    if (answers[pk.coverFile] || answers[pk.tocFile] || answers[pk.previewFile]) {
+    if (answers[pk.coverFile] || answers[pk.tocFile] || answers[pk.previewFile] || answers[pk.supplementalFiles]) {
       manifest.resources = [];
     }
 
@@ -85,6 +87,21 @@ module.exports = async (basePath, answers) => {
     if (answers[pk.previewFile]) {
       const previewObject = makeFileObject("audio", answers[pk.previewFile], basePath, "Preview", "preview");
       manifest.resources.push(previewObject);
+    }
+
+    if (answers[pk.supplementalFiles]) {
+      for (const supplement of answers[pk.supplementalFiles]) {
+        if (fs.lstatSync(supplement).isDirectory()) {
+          const dirFiles = listDirFiles(supplement);
+          for (const dirFile of dirFiles) {
+            const supplementObject = makeFileObject("*", dirFile, basePath);
+            manifest.resources.push(supplementObject);
+          }
+        } else {
+          const supplementObject = makeFileObject("*", supplement, basePath);
+          manifest.resources.push(supplementObject);
+        }
+      }
     }
 
     const audio = await listAudio(basePath, answers[pk.previewFile])
