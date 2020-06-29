@@ -20,7 +20,7 @@ module.exports = async (basePath, answers) => {
 
     let manifest = {
       "@context": ["https://schema.org", "https://www.w3.org/ns/pub-context"],
-      "conformsTo": "https://www.w3/org/TR/audiobooks/",
+      "conformsTo": "https://www.w3.org/TR/audiobooks/",
       "type": "Audiobook",
       "dateModified": new Date()
     };
