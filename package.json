@@ -39,7 +39,7 @@
     "inquirer-file-tree-selection-prompt": "^1.0.6",
     "is-isbn": "^1.1.0",
     "mime-types": "^2.1.27",
-    "minimist": "^1.2.5",
+    "minimist": "^1.2.6",
     "music-metadata": "^6.3.7",
     "pretty-bytes": "^5.3.0",
     "uuid": "^3.4.0"
