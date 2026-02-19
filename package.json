@@ -29,11 +29,11 @@
   "license": "MIT",
   "preferGlobal": true,
   "dependencies": {
-    "archiver": "^3.1.1",
+    "archiver": "^7.0.1",
     "bcp47-validate": "^1.0.0",
     "chalk": "^3.0.0",
     "fluent-ffmpeg": "^2.1.2",
-    "glob": "^7.1.6",
+    "glob": "^13.0.6",
     "inquirer": "^7.1.0",
     "inquirer-datepicker-prompt": "^0.4.2",
     "inquirer-file-tree-selection-prompt": "^1.0.6",
