@@ -29,7 +29,7 @@
   "license": "MIT",
   "preferGlobal": true,
   "dependencies": {
-    "archiver": "^7.0.1",
+    "archiver": "^8.0.0",
     "bcp47-validate": "^1.0.0",
     "chalk": "^3.0.0",
     "fluent-ffmpeg": "^2.1.2",
